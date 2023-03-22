@@ -5,13 +5,12 @@ import java.sql.*;
 //TODO: non passare gli id nei metodi per fare insert nel database
 //TODO: relazionare sede-centro(?)
 public class UtilityDatabase {
-    Connection conn;
+    static String loginUrl = "jdbc:postgresql://localhost:5432/db_tartarugheMarine";
+    static String loginUser = "postgres";
+    static String loginPassword = "0000";
+    static Connection conn;
 
-    public UtilityDatabase() {
-        conn = null;
-    }
-
-    public void loginDatabase(String loginUrl, String loginUser, String loginPassword) throws SQLException {
+    public static Connection getConnection() throws SQLException {
         System.out.println("Connessione al database in corso...");
         try {
             conn = DriverManager.getConnection(loginUrl, loginUser, loginPassword);
@@ -61,7 +60,7 @@ public class UtilityDatabase {
             System.out.println("Qualcosa è andato storto durante l'inserimento!");
         }
     }
-
+//TODO: attributo id_cartellaclinica e attributo id_tartaruga, targhetta (deve avere l'id del primo accesso (il primo id_tartaruga))(id_tartarga potrà cambiare)
     public void insertIntoTableCartellaClinica(String valueSpecie, int valueLunghezza, int valueLarghezza, int valuePeso, LuogoRitrovamento luogoRitrovamento) throws SQLException {
         try {
             String codeSQL = "INSERT INTO cartella_clinica(specie, lunghezza, larghezza, peso, luogo_ritrovamento) VALUES (?,?,?,?,(?,?,?,?,?,?))";
