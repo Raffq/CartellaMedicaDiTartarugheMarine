@@ -52,10 +52,10 @@ public class UtilityDatabase {
             PreparedStatement statement = conn.prepareStatement(codeSQL);
             statement.setString(1, valueNome);
             statement.setString(2, valueIndirizzo.getVia());
-            statement.setString(3, String.valueOf(valueIndirizzo.getNumero()));
+            statement.setInt(3, valueIndirizzo.getNumero());
             statement.setString(4, valueProvincia);
             statement.setString(5, valueCitta);
-            statement.setString(6, String.valueOf(valueCap));
+            statement.setInt(6, valueCap);
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto durante l'inserimento!");
@@ -67,15 +67,15 @@ public class UtilityDatabase {
             String codeSQL = "INSERT INTO cartella_clinica(specie, lunghezza, larghezza, peso, luogo_ritrovamento) VALUES (?,?,?,?,(?,?,?,?,?,?))";
             PreparedStatement statement = conn.prepareStatement(codeSQL);
             statement.setString(1, valueSpecie);
-            statement.setString(2, String.valueOf(valueLunghezza));
-            statement.setString(3, String.valueOf(valueLarghezza));
-            statement.setString(4, String.valueOf(valuePeso));
+            statement.setInt(2, valueLunghezza);
+            statement.setInt(3, valueLarghezza);
+            statement.setInt(4, valuePeso);
             statement.setString(5, luogoRitrovamento.getNome_spiaggia());
             statement.setString(6, luogoRitrovamento.getComune());
             statement.setString(7, luogoRitrovamento.getProvincia());
             statement.setString(8, luogoRitrovamento.getNazione());
-            statement.setString(9, String.valueOf(luogoRitrovamento.getLatitudine()));
-            statement.setString(10, String.valueOf(luogoRitrovamento.getLongitudine()));
+            statement.setInt(9, luogoRitrovamento.getLatitudine());
+            statement.setInt(10, luogoRitrovamento.getLongitudine());
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto durante l'inserimento!");
@@ -89,8 +89,8 @@ public class UtilityDatabase {
             PreparedStatement statement = conn.prepareStatement(codeSQL);
             statement.setString(1, valueNome);
             statement.setString(2, valueCognome);
-            statement.setString(3, String.valueOf(valueStipendio));
-            statement.setString(4, String.valueOf(valueTelefono));
+            statement.setInt(3, valueStipendio);
+            statement.setInt(4, valueTelefono);
             statement.setString(5, valueEmail);
             statement.execute();
         } catch (SQLException e) {
