@@ -8,4 +8,20 @@ public class Sede {
         this.nome = nome;
         this.indirizzo = indirizzo;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Indirizzo getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setIndirizzo(Indirizzo indirizzo) {
+        this.indirizzo = indirizzo;
+    }
 }

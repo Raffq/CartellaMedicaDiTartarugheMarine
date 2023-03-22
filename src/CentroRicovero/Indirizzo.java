@@ -8,4 +8,20 @@ public class Indirizzo {
         this.via = via;
         this.numero = numero;
     }
+
+    public String getVia() {
+        return via;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
 }
