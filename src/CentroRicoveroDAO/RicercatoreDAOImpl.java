@@ -2,7 +2,7 @@ package CentroRicoveroDAO;
 
 import java.sql.SQLException;
 import java.util.List;
-import CentroRicovero.Ricercatore;
+
 public class RicercatoreDAOImpl implements RicercatoreDAO{
 
     @Override
@@ -16,22 +16,22 @@ public class RicercatoreDAOImpl implements RicercatoreDAO{
     }
 
     @Override
-    public int save() throws SQLException {
-        return 0;
+    public void save(Object o) throws SQLException {
+
     }
 
     @Override
-    public int insert() throws SQLException {
-        return 0;
+    public void insert(Object o) throws SQLException {
+
     }
 
     @Override
-    public int update() throws SQLException {
-        return 0;
+    public void update(Object o) throws SQLException {
+
     }
 
     @Override
-    public int delete() throws SQLException {
-        return 0;
+    public void delete(Object o) throws SQLException {
+
     }
 }

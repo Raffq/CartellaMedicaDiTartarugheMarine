@@ -2,9 +2,9 @@ package CentroRicovero;
 
 public class Sede {
     String nome;
-    Indirizzo indirizzo;
+    String indirizzo;
 
-    public Sede(String nome, Indirizzo indirizzo) {
+    public Sede(String nome, String indirizzo) {
         this.nome = nome;
         this.indirizzo = indirizzo;
     }
@@ -13,7 +13,7 @@ public class Sede {
         return nome;
     }
 
-    public Indirizzo getIndirizzo() {
+    public String getIndirizzo() {
         return indirizzo;
     }
 
@@ -21,7 +21,7 @@ public class Sede {
         this.nome = nome;
     }
 
-    public void setIndirizzo(Indirizzo indirizzo) {
+    public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
 }

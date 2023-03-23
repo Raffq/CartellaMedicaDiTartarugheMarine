@@ -3,6 +3,7 @@ package CentroRicovero;
 public class Tartaruga {
     int id_tartaruga;
     String nome;
+    int targhetta;
     boolean presente_nel_centro;
 
     public Tartaruga(int id_tartaruga, String nome) {
@@ -23,6 +24,10 @@ public class Tartaruga {
         return presente_nel_centro;
     }
 
+    public int getTarghetta(){
+        return targhetta;
+    }
+
     public void setId_tartaruga(int id_tartaruga) {
         this.id_tartaruga = id_tartaruga;
     }
@@ -33,5 +38,9 @@ public class Tartaruga {
 
     public void setPresente_nel_centro(boolean presente_nel_centro) {
         this.presente_nel_centro = presente_nel_centro;
+    }
+
+    public void setTarghetta(int targhetta){
+        this.targhetta = targhetta;
     }
 }

@@ -5,7 +5,7 @@ import java.sql.*;
 //TODO: non passare gli id nei metodi per fare insert nel database
 //TODO: relazionare sede-centro(?)
 public class UtilityDatabase {
-    static String loginUrl = "jdbc:postgresql://localhost:5432/db_tartarugheMarine";
+    static String loginUrl = "jdbc:postgresql://localhost:5432/CartellaMedicaTartarugheMarine";
     static String loginUser = "postgres";
     static String loginPassword = "0000";
     static Connection conn;
@@ -18,8 +18,9 @@ public class UtilityDatabase {
                 System.out.println("Connessione al database avvenuta con successo!");
             }
         } catch (SQLException e) {
-            System.out.println("OPS! C'è stato un problema durante l'accesso!");
+            System.out.println("OPS! C'è stato un problema durante l'accesso!" + e.getMessage());
         }
+        return conn;
     }
 
     public void insertIntoTableTartaruga(String valueNome, boolean valuePresente_nel_centro) throws SQLException {
@@ -45,7 +46,7 @@ public class UtilityDatabase {
         }
     }
 
-    public void insertIntoTableSede(String valueNome, Indirizzo valueIndirizzo, String valueProvincia, String valueCitta, int valueCap) throws SQLException {
+   /* public void insertIntoTableSede(String valueNome, Indirizzo valueIndirizzo, String valueProvincia, String valueCitta, int valueCap) throws SQLException {
         try {
             String codeSQL = "INSERT INTO centro(nome, indirizzo, provincia, citta, cap) VALUES (?,(?,?),?,?,?)";
             PreparedStatement statement = conn.prepareStatement(codeSQL);
@@ -59,9 +60,9 @@ public class UtilityDatabase {
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto durante l'inserimento!");
         }
-    }
+    }*/
 //TODO: attributo id_cartellaclinica e attributo id_tartaruga, targhetta (deve avere l'id del primo accesso (il primo id_tartaruga))(id_tartarga potrà cambiare)
-    public void insertIntoTableCartellaClinica(String valueSpecie, int valueLunghezza, int valueLarghezza, int valuePeso, LuogoRitrovamento luogoRitrovamento) throws SQLException {
+    /*public void insertIntoTableCartellaClinica(String valueSpecie, int valueLunghezza, int valueLarghezza, int valuePeso, LuogoRitrovamento luogoRitrovamento) throws SQLException {
         try {
             String codeSQL = "INSERT INTO cartella_clinica(specie, lunghezza, larghezza, peso, luogo_ritrovamento) VALUES (?,?,?,?,(?,?,?,?,?,?))";
             PreparedStatement statement = conn.prepareStatement(codeSQL);
@@ -79,7 +80,7 @@ public class UtilityDatabase {
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto durante l'inserimento!");
         }
-    }
+    }*/
 
     //matricola is auto-generated
     public void insertIntoTableVeterinario(String valueNome, String valueCognome, int valueStipendio, int valueTelefono, String valueEmail) throws SQLException {

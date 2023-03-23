@@ -8,7 +8,7 @@ import java.util.List;
 public class SedeDAOImpl implements SedeDAO{
 
     @Override
-    public Sede get(int id) throws SQLException {
+    public Object get(int id) throws SQLException {
         return null;
     }
 
@@ -18,22 +18,22 @@ public class SedeDAOImpl implements SedeDAO{
     }
 
     @Override
-    public int save() throws SQLException {
-        return 0;
+    public void save(Object o) throws SQLException {
+
     }
 
     @Override
-    public int insert() throws SQLException {
-        return 0;
+    public void insert(Object o) throws SQLException {
+
     }
 
     @Override
-    public int update() throws SQLException {
-        return 0;
+    public void update(Object o) throws SQLException {
+
     }
 
     @Override
-    public int delete() throws SQLException {
-        return 0;
+    public void delete(Object o) throws SQLException {
+
     }
 }

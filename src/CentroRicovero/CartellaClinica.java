@@ -5,9 +5,9 @@ public class CartellaClinica {
     int lunghezza;
     int larghezza;
     int peso;
-    LuogoRitrovamento luogoRitrovamento;
+    String luogoRitrovamento;
 
-    public CartellaClinica(String specie, int lunghezza, int larghezza, int peso, LuogoRitrovamento luogoRitrovamento) {
+    public CartellaClinica(String specie, int lunghezza, int larghezza, int peso, String luogoRitrovamento) {
         this.specie = specie;
         this.lunghezza = lunghezza;
         this.larghezza = larghezza;
@@ -31,7 +31,7 @@ public class CartellaClinica {
         return peso;
     }
 
-    public LuogoRitrovamento getLuogoRitrovamento() {
+    public String getLuogoRitrovamento() {
         return luogoRitrovamento;
     }
 
@@ -51,7 +51,7 @@ public class CartellaClinica {
         this.peso = peso;
     }
 
-    public void setLuogoRitrovamento(LuogoRitrovamento luogoRitrovamento) {
+    public void setLuogoRitrovamento(String luogoRitrovamento) {
         this.luogoRitrovamento = luogoRitrovamento;
     }
 }
