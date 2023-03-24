@@ -1,4 +1,7 @@
 package CentroRicoveroDAO;
-public interface VeterinarioDAO extends DAO{
+
+import CentroRicovero.Veterinario;
+
+public interface VeterinarioDAO extends DAO<Veterinario> {
 
 }

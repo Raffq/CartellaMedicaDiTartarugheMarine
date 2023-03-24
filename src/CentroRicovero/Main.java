@@ -13,7 +13,6 @@ public class Main {
         CartellaClinica cartellaClinica = new CartellaClinica("grazia", 10,10,10, "caracciolo");
         CartellaClinicaDAOImpl cartellaClinicaDAO = new CartellaClinicaDAOImpl();
         cartellaClinica = cartellaClinicaDAO.get(1);
-
         System.out.println(cartellaClinica.getLarghezza());
     }
 }

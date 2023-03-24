@@ -6,6 +6,7 @@ public class CartellaClinica {
     int larghezza;
     int peso;
     String luogoRitrovamento;
+    int id_cartella;
 
     public CartellaClinica(String specie, int lunghezza, int larghezza, int peso, String luogoRitrovamento) {
         this.specie = specie;
@@ -35,6 +36,10 @@ public class CartellaClinica {
         return luogoRitrovamento;
     }
 
+    public int getId_cartella() {
+        return id_cartella;
+    }
+
     public void setSpecie(String specie) {
         this.specie = specie;
     }
@@ -53,5 +58,9 @@ public class CartellaClinica {
 
     public void setLuogoRitrovamento(String luogoRitrovamento) {
         this.luogoRitrovamento = luogoRitrovamento;
+    }
+
+    public void setId_cartella(int id_cartella) {
+        this.id_cartella = id_cartella;
     }
 }

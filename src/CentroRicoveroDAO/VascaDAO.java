@@ -1,4 +1,6 @@
 package CentroRicoveroDAO;
 
-public interface VascaDAO extends DAO{
+import CentroRicovero.Vasca;
+
+public interface VascaDAO extends DAO<Vasca> {
 }

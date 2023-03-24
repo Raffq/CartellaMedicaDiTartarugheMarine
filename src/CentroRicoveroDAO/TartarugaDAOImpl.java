@@ -1,39 +1,41 @@
 package CentroRicoveroDAO;
 
 import CentroRicovero.Tartaruga;
+import CentroRicovero.UtilityDatabase;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 public class TartarugaDAOImpl implements TartarugaDAO{
-
     @Override
-    public Object get(int id) throws SQLException {
+    public Tartaruga get(int id) throws SQLException {
         return null;
     }
 
     @Override
-    public List getAll() throws SQLException {
+    public List<Tartaruga> getAll() throws SQLException {
         return null;
     }
 
     @Override
-    public void save(Object o) throws SQLException {
-
+    public void insert(Tartaruga tartaruga) throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        try {
+            String codeSQL = "INSERT INTO tartaruga(nome, presente_nel_centro, targhetta) VALUES (?,?,?)";
+            PreparedStatement statement = conn.prepareStatement(codeSQL);
+            statement.setString(1, tartaruga.getNome());
+            statement.setBoolean(2, tartaruga.isPresente_nel_centro());
+            statement.setInt(3, tartaruga.getTarghetta());
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto durante l'inserimento!");
+        }
     }
 
     @Override
-    public void insert(Object o) throws SQLException {
-
-    }
-
-    @Override
-    public void update(Object o) throws SQLException {
-
-    }
-
-    @Override
-    public void delete(Object o) throws SQLException {
+    public void update(Tartaruga tartaruga) throws SQLException {
 
     }
 }

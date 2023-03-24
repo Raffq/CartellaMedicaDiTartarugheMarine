@@ -1,4 +1,6 @@
 package CentroRicoveroDAO;
 
-public interface OperatoreDAO extends DAO{
+import CentroRicovero.Operatore;
+
+public interface OperatoreDAO extends DAO<Operatore> {
 }

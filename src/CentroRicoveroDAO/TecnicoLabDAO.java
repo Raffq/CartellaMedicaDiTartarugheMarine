@@ -1,4 +1,6 @@
 package CentroRicoveroDAO;
 
-public interface TecnicoLabDAO extends DAO{
+import CentroRicovero.TecnicoLab;
+
+public interface TecnicoLabDAO extends DAO<TecnicoLab> {
 }

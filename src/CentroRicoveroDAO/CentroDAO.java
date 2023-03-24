@@ -1,4 +1,6 @@
 package CentroRicoveroDAO;
 
-public interface CentroDAO extends DAO{
+import CentroRicovero.Centro;
+
+public interface CentroDAO extends DAO<Centro>{
 }

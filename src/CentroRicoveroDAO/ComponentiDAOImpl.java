@@ -1,39 +1,53 @@
 package CentroRicoveroDAO;
 
 import CentroRicovero.Componenti;
+import CentroRicovero.UtilityDatabase;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 public class ComponentiDAOImpl implements ComponentiDAO{
 
     @Override
-    public Object get(int id) throws SQLException {
+    public Componenti get(int id) throws SQLException {
         return null;
     }
 
     @Override
-    public List getAll() throws SQLException {
+    public List<Componenti> getAll() throws SQLException {
         return null;
     }
 
     @Override
-    public void save(Object o) throws SQLException {
-
+    public void insert(Componenti componenti) throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        try {
+            String codeSQL = "INSERT INTO componenti(descrizione) VALUES (?)";
+            PreparedStatement statement = conn.prepareStatement(codeSQL);
+            statement.setString(1, componenti.getDescrizione());
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto durante l'inserimento!");
+        }
     }
-
+//TODO
     @Override
-    public void insert(Object o) throws SQLException {
+    public void update(Componenti componenti) throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        try{
+            String codeSQL = "UPDATE cartella_clinica SET specie = ?, lunghezza = ?, peso = ?, luogo_ritrovamento = ?";
+            PreparedStatement statement = conn.prepareStatement(codeSQL);
+            statement.setString(1,cartellaClinica.getSpecie());
+            statement.setInt(2,cartellaClinica.getLunghezza());
+            statement.setInt(3,cartellaClinica.getLarghezza());
+            statement.setInt(4,cartellaClinica.getPeso());
+            statement.setString(5,cartellaClinica.getLuogoRitrovamento());
+            statement.execute();
 
-    }
-
-    @Override
-    public void update(Object o) throws SQLException {
-
-    }
-
-    @Override
-    public void delete(Object o) throws SQLException {
-
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
     }
 }

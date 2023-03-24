@@ -1,4 +1,6 @@
 package CentroRicoveroDAO;
 
-public interface ComponentiDAO extends DAO{
+import CentroRicovero.Componenti;
+
+public interface ComponentiDAO extends DAO<Componenti>{
 }

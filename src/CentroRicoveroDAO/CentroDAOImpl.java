@@ -1,39 +1,95 @@
 package CentroRicoveroDAO;
 
+import CentroRicovero.CartellaClinica;
 import CentroRicovero.Centro;
+import CentroRicovero.UtilityDatabase;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CentroDAOImpl implements CentroDAO{
-
+    //TODO
     @Override
-    public Object get(int id) throws SQLException {
-        return null;
+    public Centro get(int id) throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        Centro centro = null;
+
+        String codeSQL = "SELECT * FROM Centro WHERE id_centro=?";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            if (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+
+
+                centro = new Centro(nome);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+
+        }
+        return centro;
+    }
+    //TODO
+    @Override
+    public List<Centro> getAll() throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        String codeSQL = "SELECT * FROM cartella_clinica";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+
+        ArrayList<CartellaClinica> cartellaClinicaList = new ArrayList<>();
+
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            while (resultSet.next()){
+                String specie = resultSet.getString("specie");
+                int lunghezza = resultSet.getInt("lunghezza");
+                int larghezza = resultSet.getInt("larghezza");
+                int peso = resultSet.getInt("peso");
+                String luogoRitrovamento = resultSet.getString("luogo_ritrovamento");
+
+                CartellaClinica cartellaClinica = new CartellaClinica(specie, lunghezza, larghezza, peso, luogoRitrovamento);
+                cartellaClinicaList.add(cartellaClinica);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto");
+        }
+        return cartellaClinicaList;
     }
 
     @Override
-    public List getAll() throws SQLException {
-        return null;
+    public void insert(Centro centro) throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        try {
+            String codeSQL = "INSERT INTO centro(nome) VALUES (?)";
+            PreparedStatement statement = conn.prepareStatement(codeSQL);
+            statement.setString(1, centro.getNome());
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto durante l'inserimento!");
+        }
     }
-
+//TODO
     @Override
-    public void save(Object o) throws SQLException {
+    public void update(Centro centro) throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        try{
+            String codeSQL = "UPDATE cartella_clinica SET specie = ?, lunghezza = ?, peso = ?, luogo_ritrovamento = ?";
+            PreparedStatement statement = conn.prepareStatement(codeSQL);
+            statement.setString(1,cartellaClinica.getSpecie());
+            statement.setInt(2,cartellaClinica.getLunghezza());
+            statement.setInt(3,cartellaClinica.getLarghezza());
+            statement.setInt(4,cartellaClinica.getPeso());
+            statement.setString(5,cartellaClinica.getLuogoRitrovamento());
+            statement.execute();
 
-    }
-
-    @Override
-    public void insert(Object o) throws SQLException {
-
-    }
-
-    @Override
-    public void update(Object o) throws SQLException {
-
-    }
-
-    @Override
-    public void delete(Object o) throws SQLException {
-
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
     }
 }

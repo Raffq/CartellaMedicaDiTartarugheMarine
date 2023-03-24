@@ -5,8 +5,7 @@ public class Centro {
     String nome;
     Sede sede;
 
-    public Centro(int id_centro, String nome, Sede sede) {
-        this.id_centro = id_centro;
+    public Centro(String nome, Sede sede) {
         this.nome = nome;
         this.sede = sede;
     }

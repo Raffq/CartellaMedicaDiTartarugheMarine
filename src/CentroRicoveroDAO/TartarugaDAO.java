@@ -1,4 +1,6 @@
 package CentroRicoveroDAO;
 
-public interface TartarugaDAO extends DAO{
+import CentroRicovero.Tartaruga;
+
+public interface TartarugaDAO extends DAO<Tartaruga> {
 }

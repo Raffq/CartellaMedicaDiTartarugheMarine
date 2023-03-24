@@ -1,4 +1,6 @@
 package CentroRicoveroDAO;
 
-public interface PersonaleDAO extends DAO{
+import CentroRicovero.Personale;
+
+public interface PersonaleDAO extends DAO<Personale> {
 }

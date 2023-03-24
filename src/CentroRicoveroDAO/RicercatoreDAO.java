@@ -1,4 +1,6 @@
 package CentroRicoveroDAO;
 
-public interface RicercatoreDAO extends DAO{
+import CentroRicovero.Ricercatore;
+
+public interface RicercatoreDAO extends DAO<Ricercatore> {
 }
