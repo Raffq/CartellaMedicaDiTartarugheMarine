@@ -81,7 +81,7 @@ public class CartellaClinicaDAOImpl implements CartellaClinicaDAO {
     public void update(CartellaClinica cartellaClinica) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try{
-            String codeSQL = "UPDATE cartella_clinica SET specie = ?, lunghezza = ?, peso = ?, luogo_ritrovamento = ?";
+            String codeSQL = "UPDATE cartella_clinica SET specie = ?, lunghezza = ?, larghezza = ?, peso = ?, luogo_ritrovamento = ?";
             PreparedStatement statement = conn.prepareStatement(codeSQL);
             statement.setString(1,cartellaClinica.getSpecie());
             statement.setInt(2,cartellaClinica.getLunghezza());
