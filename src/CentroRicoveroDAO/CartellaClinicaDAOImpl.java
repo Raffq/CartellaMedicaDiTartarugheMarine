@@ -76,7 +76,6 @@ public class CartellaClinicaDAOImpl implements CartellaClinicaDAO {
             System.out.println("Qualcosa è andato storto durante l'inserimento!");
         }
     }
-//TODO
     @Override
     public void update(CartellaClinica cartellaClinica) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();

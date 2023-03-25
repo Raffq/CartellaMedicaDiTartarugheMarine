@@ -16,10 +16,6 @@ public class Centro {
         this.nome = nome;
     }
 
-    public void setSede(Sede sede) {
-        this.sede = sede;
-    }
-
     public int getId_centro() {
         return id_centro;
     }
@@ -28,7 +24,4 @@ public class Centro {
         return nome;
     }
 
-    public Sede getSede() {
-        return sede;
-    }
 }

@@ -1,7 +1,5 @@
 package CentroRicoveroDAO;
 
-import CentroRicovero.Operatore;
-import CentroRicovero.Personale;
 import CentroRicovero.UtilityDatabase;
 import CentroRicovero.Veterinario;
 

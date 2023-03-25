@@ -86,7 +86,6 @@ public class OperatoreDAOImpl implements OperatoreDAO {
             System.out.println("Qualcosa è andato storto!");
         }
     }
-//TODO
     @Override
     public void update(Operatore operatore) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();

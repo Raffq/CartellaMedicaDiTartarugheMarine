@@ -59,7 +59,6 @@ public class ComponentiDAOImpl implements ComponentiDAO{
             System.out.println("Qualcosa è andato storto durante l'inserimento!");
         }
     }
-//TODO
     @Override
     public void update(Componenti componenti) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
