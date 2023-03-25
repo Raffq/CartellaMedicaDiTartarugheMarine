@@ -3,11 +3,9 @@ package CentroRicovero;
 public class Centro {
     int id_centro;
     String nome;
-    Sede sede;
 
-    public Centro(String nome, Sede sede) {
+    public Centro(String nome) {
         this.nome = nome;
-        this.sede = sede;
     }
 
     public void setId_centro(int id_centro) {

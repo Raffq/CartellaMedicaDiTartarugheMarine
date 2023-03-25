@@ -39,27 +39,25 @@ public class CentroDAOImpl implements CentroDAO{
     @Override
     public List<Centro> getAll() throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
-        String codeSQL = "SELECT * FROM cartella_clinica";
+        String codeSQL = "SELECT * FROM centro";
         PreparedStatement statement = conn.prepareStatement(codeSQL);
 
-        ArrayList<CartellaClinica> cartellaClinicaList = new ArrayList<>();
+        ArrayList<Centro> centroList = new ArrayList<>();
 
         ResultSet resultSet = statement.executeQuery();
         try {
             while (resultSet.next()){
-                String specie = resultSet.getString("specie");
-                int lunghezza = resultSet.getInt("lunghezza");
-                int larghezza = resultSet.getInt("larghezza");
-                int peso = resultSet.getInt("peso");
-                String luogoRitrovamento = resultSet.getString("luogo_ritrovamento");
+                String nome = resultSet.getString("nome");
+                int id_centro = resultSet.getInt("id_centro");
 
-                CartellaClinica cartellaClinica = new CartellaClinica(specie, lunghezza, larghezza, peso, luogoRitrovamento);
-                cartellaClinicaList.add(cartellaClinica);
+                Centro centro = new Centro(nome);
+                centro.setId_centro(id_centro);
+                centroList.add(centro);
             }
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto");
         }
-        return cartellaClinicaList;
+        return centroList;
     }
 
     @Override

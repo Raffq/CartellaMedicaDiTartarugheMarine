@@ -1,23 +1,72 @@
 package CentroRicoveroDAO;
 
+import CentroRicovero.Centro;
 import CentroRicovero.Operatore;
 import CentroRicovero.Personale;
 import CentroRicovero.UtilityDatabase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonaleDAOImpl implements PersonaleDAO{
     @Override
     public Personale get(int id) throws SQLException {
-        return null;
+        Connection conn = UtilityDatabase.getConnection();
+
+        Personale personale = null;
+
+        String codeSQL = "SELECT * FROM personale WHERE matricola = ?";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            if (resultSet.next()){
+                String nome = resultSet.getString("nome");
+                String cognome = resultSet.getString("cognome");
+                int matricola = resultSet.getInt("matricola");
+                int stipendio = resultSet.getInt("stipendio");
+                int telefono = resultSet.getInt("telefono");
+                String email = resultSet.getString("email");
+
+                personale = new Operatore(nome, cognome, stipendio, telefono, email);
+                personale.setMatricola(matricola);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+        return personale;
     }
 
     @Override
     public List<Personale> getAll() throws SQLException {
-        return null;
+        Connection conn = UtilityDatabase.getConnection();
+        String codeSQL = "SELECT * FROM personale";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+
+        ArrayList<Personale> personaleList = new ArrayList<>();
+
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            while (resultSet.next()){
+                String nome = resultSet.getString("nome");
+                String cognome = resultSet.getString("cognome");
+                int matricola = resultSet.getInt("matricola");
+                int stipendio = resultSet.getInt("stipendio");
+                int telefono = resultSet.getInt("telefono");
+                String email = resultSet.getString("email");
+
+                Personale personale = new Personale(nome, cognome, stipendio, telefono, email);
+                personale.setMatricola(matricola);
+                personaleList.add(personale);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+        return personaleList;
     }
 
     @Override
@@ -33,7 +82,7 @@ public class PersonaleDAOImpl implements PersonaleDAO{
             statement.setString(5, personale.getEmail());
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Qualcosa è andato storto durante l'inserimento!");
+            System.out.println("Qualcosa è andato storto!");
         }
     }
 //TODO

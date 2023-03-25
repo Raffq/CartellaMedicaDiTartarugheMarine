@@ -1,24 +1,73 @@
 package CentroRicoveroDAO;
 
+import CentroRicovero.Centro;
 import CentroRicovero.Personale;
 import CentroRicovero.Operatore;
 import CentroRicovero.UtilityDatabase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OperatoreDAOImpl implements OperatoreDAO {
 
     @Override
     public Operatore get(int id) throws SQLException {
-        return null;
+        Connection conn = UtilityDatabase.getConnection();
+
+        Operatore operatore = null;
+
+        String codeSQL = "SELECT * FROM operatore WHERE matricola = ?";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            if (resultSet.next()){
+                String nome = resultSet.getString("nome");
+                String cognome = resultSet.getString("cognome");
+                int matricola = resultSet.getInt("matricola");
+                int stipendio = resultSet.getInt("stipendio");
+                int telefono = resultSet.getInt("telefono");
+                String email = resultSet.getString("email");
+
+                operatore = new Operatore(nome, cognome, stipendio, telefono, email);
+                operatore.setMatricola(matricola);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+        return operatore;
     }
 
     @Override
     public List<Operatore> getAll() throws SQLException {
-        return null;
+        Connection conn = UtilityDatabase.getConnection();
+        String codeSQL = "SELECT * FROM operatore";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+
+        ArrayList<Operatore> operatoreList = new ArrayList<>();
+
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            while (resultSet.next()){
+                String nome = resultSet.getString("nome");
+                String cognome = resultSet.getString("cognome");
+                int matricola = resultSet.getInt("matricola");
+                int stipendio = resultSet.getInt("stipendio");
+                int telefono = resultSet.getInt("telefono");
+                String email = resultSet.getString("email");
+
+                Operatore operatore = new Operatore(nome, cognome, stipendio, telefono, email);
+                operatore.setMatricola(matricola);
+                operatoreList.add(operatore);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+        return operatoreList;
     }
 
     @Override
@@ -34,7 +83,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
             statement.setString(5, operatore.getEmail());
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Qualcosa è andato storto durante l'inserimento!");
+            System.out.println("Qualcosa è andato storto!");
         }
     }
 //TODO

@@ -78,7 +78,7 @@ public class SedeDAOImpl implements SedeDAO{
             statement.setInt(5, sede.getCap());
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Qualcosa è andato storto durante l'inserimento!");
+            System.out.println("Qualcosa è andato storto!");
         }
     }
 
