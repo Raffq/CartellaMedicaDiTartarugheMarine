@@ -39,6 +39,14 @@ public class VeterinarioDAOImpl implements VeterinarioDAO{
 
     @Override
     public void update(Veterinario veterinario) throws SQLException {
-
+        Connection conn = UtilityDatabase.getConnection();
+        String codeSQL = "UPDATE veterinario SET nome = ?, stipendio = ?, telefono = ?, cognome = ?, email = ?";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        statement.setString(1, veterinario.getNome());
+        statement.setInt(2, veterinario.getStipendio());
+        statement.setInt(3, veterinario.getTelefono());
+        statement.setString(4, veterinario.getCognome());
+        statement.setString(5, veterinario.getEmail());
+        statement.execute();
     }
 }

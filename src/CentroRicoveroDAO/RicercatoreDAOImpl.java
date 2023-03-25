@@ -39,6 +39,18 @@ public class RicercatoreDAOImpl implements RicercatoreDAO{
 
     @Override
     public void update(Ricercatore ricercatore) throws SQLException {
-
+        Connection conn = UtilityDatabase.getConnection();
+        try {
+            String codeSQL = "UPDATE ricercatore SET nome = ?, stipendio = ?, telefono = ?, cognome = ?, email = ?";
+            PreparedStatement statement = conn.prepareStatement(codeSQL);
+            statement.setString(1, ricercatore.getNome());
+            statement.setInt(2, ricercatore.getStipendio());
+            statement.setInt(3, ricercatore.getTelefono());
+            statement.setString(4, ricercatore.getCognome());
+            statement.setString(5, ricercatore.getEmail());
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto durante l'inserimento!");
+        }
     }
 }

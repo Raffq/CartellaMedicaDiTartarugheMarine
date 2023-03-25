@@ -37,13 +37,9 @@ public class ComponentiDAOImpl implements ComponentiDAO{
     public void update(Componenti componenti) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try{
-            String codeSQL = "UPDATE cartella_clinica SET specie = ?, lunghezza = ?, peso = ?, luogo_ritrovamento = ?";
+            String codeSQL = "UPDATE componenti SET descrizione = ?";
             PreparedStatement statement = conn.prepareStatement(codeSQL);
-            statement.setString(1,cartellaClinica.getSpecie());
-            statement.setInt(2,cartellaClinica.getLunghezza());
-            statement.setInt(3,cartellaClinica.getLarghezza());
-            statement.setInt(4,cartellaClinica.getPeso());
-            statement.setString(5,cartellaClinica.getLuogoRitrovamento());
+            statement.setString(1,componenti.getDescrizione());
             statement.execute();
 
         } catch (SQLException e) {
