@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperatoreDAOImpl implements OperatoreDAO {
+public class OperatoreDAOImpl extends PersonaleDAOImpl {
 
     @Override
     public Operatore get(int id) throws SQLException {
@@ -43,12 +43,12 @@ public class OperatoreDAOImpl implements OperatoreDAO {
     }
 
     @Override
-    public List<Operatore> getAll() throws SQLException {
+    public List<Personale> getAll() throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         String codeSQL = "SELECT * FROM operatore";
         PreparedStatement statement = conn.prepareStatement(codeSQL);
 
-        ArrayList<Operatore> operatoreList = new ArrayList<>();
+        ArrayList<Personale> operatoreList = new ArrayList<>();
 
         ResultSet resultSet = statement.executeQuery();
         try {
@@ -70,7 +70,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
         return operatoreList;
     }
 
-    @Override
+
     public void insert(Operatore operatore) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {
@@ -86,7 +86,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
             System.out.println("Qualcosa è andato storto!");
         }
     }
-    @Override
+
     public void update(Operatore operatore) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try{

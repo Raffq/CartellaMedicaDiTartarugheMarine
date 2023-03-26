@@ -21,12 +21,14 @@ public class CartellaClinicaDAOImpl implements CartellaClinicaDAO {
             ResultSet resultSet = statement.executeQuery();
             try {
                     if (resultSet.next()) {
+                         int id_cartella = resultSet.getInt("id_cartella");
                          String specie = resultSet.getString("specie");
                          int lunghezza = resultSet.getInt("lunghezza");
                          int larghezza = resultSet.getInt("larghezza");
                          int peso = resultSet.getInt("peso");
                          String luogoRitrovamento = resultSet.getString("luogo_ritrovamento");
                          cartellaClinica = new CartellaClinica(specie, lunghezza, larghezza, peso, luogoRitrovamento);
+                         cartellaClinica.setId_cartella(id_cartella);
                 }
             } catch (SQLException e) {
                 System.out.println("Qualcosa è andato storto!");
@@ -46,6 +48,7 @@ public class CartellaClinicaDAOImpl implements CartellaClinicaDAO {
             ResultSet resultSet = statement.executeQuery();
             try {
             while (resultSet.next()){
+                int id_cartella = resultSet.getInt("id_cartella");
                 String specie = resultSet.getString("specie");
                 int lunghezza = resultSet.getInt("lunghezza");
                 int larghezza = resultSet.getInt("larghezza");
@@ -53,6 +56,7 @@ public class CartellaClinicaDAOImpl implements CartellaClinicaDAO {
                 String luogoRitrovamento = resultSet.getString("luogo_ritrovamento");
 
                 CartellaClinica cartellaClinica = new CartellaClinica(specie, lunghezza, larghezza, peso, luogoRitrovamento);
+                cartellaClinica.setId_cartella(id_cartella);
                 cartellaClinicaList.add(cartellaClinica);
             }
         } catch (SQLException e) {
@@ -60,6 +64,33 @@ public class CartellaClinicaDAOImpl implements CartellaClinicaDAO {
         }
             return cartellaClinicaList;
     }
+
+    @Override
+    public CartellaClinica getLast() throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        CartellaClinica cartellaClinica = null;
+
+        String codeSQL = "SELECT * FROM cartella_clinica WHERE id_cartella=currval('cartella_clinica_id_cartella_seq')";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            if (resultSet.next()) {
+                int id_cartella = resultSet.getInt("id_cartella");
+                String specie = resultSet.getString("specie");
+                int lunghezza = resultSet.getInt("lunghezza");
+                int larghezza = resultSet.getInt("larghezza");
+                int peso = resultSet.getInt("peso");
+                String luogoRitrovamento = resultSet.getString("luogo_ritrovamento");
+                cartellaClinica = new CartellaClinica(specie, lunghezza, larghezza, peso, luogoRitrovamento);
+                cartellaClinica.setId_cartella(id_cartella);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+
+        }
+        return cartellaClinica;
+    }
+
     @Override
     public void insert(CartellaClinica cartellaClinica) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();

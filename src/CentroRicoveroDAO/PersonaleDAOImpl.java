@@ -70,6 +70,33 @@ public class PersonaleDAOImpl implements PersonaleDAO{
     }
 
     @Override
+    public Personale getLast() throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+
+        Personale personale = null;
+
+        String codeSQL = "SELECT * FROM personale WHERE matricola = currval('personale_matricola_seq')";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            if (resultSet.next()){
+                String nome = resultSet.getString("nome");
+                String cognome = resultSet.getString("cognome");
+                int matricola = resultSet.getInt("matricola");
+                int stipendio = resultSet.getInt("stipendio");
+                int telefono = resultSet.getInt("telefono");
+                String email = resultSet.getString("email");
+
+                personale = new Operatore(nome, cognome, stipendio, telefono, email);
+                personale.setMatricola(matricola);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+        return personale;
+    }
+
+    @Override
     public void insert(Personale personale) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {

@@ -26,11 +26,13 @@ public class TartarugaDAOImpl implements TartarugaDAO{
         try {
             if (resultSet.next()) {
                 String nome = resultSet.getString("nome");
+                int id_tartaruga = resultSet.getInt("id_tartaruga");
                 boolean presente_nel_centro = resultSet.getBoolean("presente_nel_centro");
                 int targhetta = resultSet.getInt("targhetta");
+                String descrizione = resultSet.getString("descrizione");
 
-                tartaruga = new Tartaruga(nome);
-                tartaruga.setId_tartaruga(id);
+                tartaruga = new Tartaruga(nome, descrizione);
+                tartaruga.setId_tartaruga(id_tartaruga);
                 tartaruga.setTarghetta(targhetta);
                 tartaruga.setPresente_nel_centro(presente_nel_centro);
             }
@@ -55,27 +57,57 @@ public class TartarugaDAOImpl implements TartarugaDAO{
                 int id_tartaruga = resultSet.getInt("id_tartaruga");
                 boolean presente_nel_centro = resultSet.getBoolean("presente_nel_centro");
                 int targhetta = resultSet.getInt("targhetta");
+                String descrizione = resultSet.getString("descrizione");
 
-                Tartaruga tartaruga = new Tartaruga(nome);
+                Tartaruga tartaruga = new Tartaruga(nome, descrizione);
                 tartaruga.setPresente_nel_centro(presente_nel_centro);
                 tartaruga.setId_tartaruga(id_tartaruga);
                 tartaruga.setTarghetta(targhetta);
                 tartarugaList.add(tartaruga);
             }
         } catch (SQLException e) {
-            System.out.println("Qualcosa è andato storto");
+            System.out.println("Qualcosa è andato storto!");
         }
         return tartarugaList;
+    }
+
+    @Override
+    public Tartaruga getLast() throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+
+        Tartaruga tartaruga = null;
+
+        String codeSQL = "SELECT * FROM tartaruga WHERE id_tartaruga = currval('tartaruga_id_tartaruga_seq')";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            if (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+                int id_tartaruga = resultSet.getInt("id_tartaruga");
+                boolean presente_nel_centro = resultSet.getBoolean("presente_nel_centro");
+                int targhetta = resultSet.getInt("targhetta");
+                String descrizione = resultSet.getString("descrizione");
+
+                tartaruga = new Tartaruga(nome, descrizione);
+                tartaruga.setTarghetta(targhetta);
+                tartaruga.setId_tartaruga(id_tartaruga);
+                tartaruga.setPresente_nel_centro(presente_nel_centro);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+        return tartaruga;
     }
 
     @Override
     public void insert(Tartaruga tartaruga) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {
-            String codeSQL = "INSERT INTO tartaruga(nome, presente_nel_centro, targhetta) VALUES (?,?,currval('tartaruga_id_tartaruga_seq'::regclass))";
+            String codeSQL = "INSERT INTO tartaruga(nome, presente_nel_centro, targhetta, descrizione) VALUES (?,?,currval('tartaruga_id_tartaruga_seq'::regclass), ?)";
             PreparedStatement statement = conn.prepareStatement(codeSQL);
             statement.setString(1, tartaruga.getNome());
             statement.setBoolean(2, tartaruga.isPresente_nel_centro());
+            statement.setString(3, tartaruga.getDescrizione());
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto!");
@@ -86,10 +118,11 @@ public class TartarugaDAOImpl implements TartarugaDAO{
     public void update(Tartaruga tartaruga) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {
-            String codeSQL = "UPDATE tartaruga SET nome = ?, presente_nel_centro = ?";
+            String codeSQL = "UPDATE tartaruga SET nome = ?, presente_nel_centro = ?, descrizione = ?";
             PreparedStatement statement = conn.prepareStatement(codeSQL);
             statement.setString(1, tartaruga.getNome());
             statement.setBoolean(2, tartaruga.isPresente_nel_centro());
+            statement.setString(3, tartaruga.getDescrizione());
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto!");

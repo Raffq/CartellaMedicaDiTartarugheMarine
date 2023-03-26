@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RicercatoreDAOImpl implements RicercatoreDAO{
+public class RicercatoreDAOImpl extends PersonaleDAOImpl{
 
     @Override
     public Ricercatore get(int id) throws SQLException {
@@ -42,12 +42,12 @@ public class RicercatoreDAOImpl implements RicercatoreDAO{
         return ricercatore;
     }
     @Override
-    public List<Ricercatore> getAll() throws SQLException {
+    public List<Personale> getAll() throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         String codeSQL = "SELECT * FROM ricercatore";
         PreparedStatement statement = conn.prepareStatement(codeSQL);
 
-        ArrayList<Ricercatore> ricercatoreList = new ArrayList<>();
+        ArrayList<Personale> ricercatoreList = new ArrayList<>();
 
         ResultSet resultSet = statement.executeQuery();
         try {
@@ -69,7 +69,6 @@ public class RicercatoreDAOImpl implements RicercatoreDAO{
         return ricercatoreList;
     }
 
-    @Override
     public void insert(Ricercatore ricercatore) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {
@@ -86,7 +85,6 @@ public class RicercatoreDAOImpl implements RicercatoreDAO{
         }
     }
 
-    @Override
     public void update(Ricercatore ricercatore) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {

@@ -5,10 +5,12 @@ public class Tartaruga {
     String nome;
     int targhetta;
     boolean presente_nel_centro;
+    String descrizione;
 
-    public Tartaruga(String nome) {
+    public Tartaruga(String nome, String descrizione) {
         this.nome = nome;
         this.presente_nel_centro = true;
+        this.descrizione = descrizione;
     }
 
     public int getId_tartaruga() {
@@ -27,6 +29,8 @@ public class Tartaruga {
         return targhetta;
     }
 
+    public String getDescrizione(){ return descrizione; }
+
     public void setId_tartaruga(int id_tartaruga) {
         this.id_tartaruga = id_tartaruga;
     }
@@ -42,4 +46,8 @@ public class Tartaruga {
     public void setTarghetta(int targhetta){
         this.targhetta = targhetta;
     }
+
+    public void setDescrizione(String descrizione) {this.descrizione = descrizione; }
+
+
 }

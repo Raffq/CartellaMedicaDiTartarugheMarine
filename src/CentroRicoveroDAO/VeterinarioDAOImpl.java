@@ -1,5 +1,6 @@
 package CentroRicoveroDAO;
 
+import CentroRicovero.Personale;
 import CentroRicovero.UtilityDatabase;
 import CentroRicovero.Veterinario;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VeterinarioDAOImpl implements VeterinarioDAO{
+public class VeterinarioDAOImpl extends PersonaleDAOImpl{
 
     @Override
     public Veterinario get(int id) throws SQLException {
@@ -41,12 +42,12 @@ public class VeterinarioDAOImpl implements VeterinarioDAO{
     }
 
     @Override
-    public List<Veterinario> getAll() throws SQLException {
+    public List<Personale> getAll() throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         String codeSQL = "SELECT * FROM veterinario";
         PreparedStatement statement = conn.prepareStatement(codeSQL);
 
-        ArrayList<Veterinario> veterinarioList = new ArrayList<>();
+        ArrayList<Personale> veterinarioList = new ArrayList<>();
 
         ResultSet resultSet = statement.executeQuery();
         try {
@@ -68,7 +69,7 @@ public class VeterinarioDAOImpl implements VeterinarioDAO{
         return veterinarioList;
     }
 
-    @Override
+
     public void insert(Veterinario veterinario) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {
@@ -85,7 +86,6 @@ public class VeterinarioDAOImpl implements VeterinarioDAO{
         }
     }
 
-    @Override
     public void update(Veterinario veterinario) throws SQLException {
         try {
             Connection conn = UtilityDatabase.getConnection();

@@ -24,10 +24,11 @@ public class CentroDAOImpl implements CentroDAO{
         ResultSet resultSet = statement.executeQuery();
         try {
             if (resultSet.next()) {
+                int id_centro = resultSet.getInt("id_centro");
                 String nome = resultSet.getString("nome");
 
-
                 centro = new Centro(nome);
+                centro.setId_centro(id_centro);
             }
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto!");
@@ -58,6 +59,29 @@ public class CentroDAOImpl implements CentroDAO{
             System.out.println("Qualcosa è andato storto");
         }
         return centroList;
+    }
+
+    @Override
+    public Centro getLast() throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        Centro centro = null;
+
+        String codeSQL = "SELECT * FROM Centro WHERE id_centro=currval('centro_id_centro_seq')";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            if (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+                int id_centro = resultSet.getInt("id_centro");
+
+                centro = new Centro(nome);
+                centro.setId_centro(id_centro);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+
+        }
+        return centro;
     }
 
     @Override

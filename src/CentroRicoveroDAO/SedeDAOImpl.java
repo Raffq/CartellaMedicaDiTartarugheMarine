@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SedeDAOImpl implements SedeDAO{
+public class SedeDAOImpl implements SedeDAO {
 
     @Override
     public Sede get(int id) throws SQLException {
@@ -23,12 +23,14 @@ public class SedeDAOImpl implements SedeDAO{
         ResultSet resultSet = statement.executeQuery();
         try {
             if (resultSet.next()) {
+                int id_sede = resultSet.getInt("id_sede");
                 String nome = resultSet.getString("nome");
                 String indirizzo = resultSet.getString("indirizzo");
                 String provincia = resultSet.getString("provincia");
                 String citta = resultSet.getString("citta");
                 int cap = resultSet.getInt("cap");
                 sede = new Sede(nome, indirizzo, provincia, citta, cap);
+                sede.setId_sede(id_sede);
             }
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto!");
@@ -63,6 +65,32 @@ public class SedeDAOImpl implements SedeDAO{
             System.out.println("Qualcosa è andato storto");
         }
         return sedeList;
+    }
+
+    @Override
+    public Sede getLast() throws SQLException {
+        Connection conn = UtilityDatabase.getConnection();
+        Sede sede = null;
+
+        String codeSQL = "SELECT * FROM sede WHERE id_sede=currval('sede_id_sede_seq')";
+        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+            if (resultSet.next()) {
+                int id_sede = resultSet.getInt("id_sede");
+                String nome = resultSet.getString("nome");
+                String indirizzo = resultSet.getString("indirizzo");
+                String provincia = resultSet.getString("provincia");
+                String citta = resultSet.getString("citta");
+                int cap = resultSet.getInt("cap");
+                sede = new Sede(nome, indirizzo, provincia, citta, cap);
+                sede.setId_sede(id_sede);
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+
+        }
+        return sede;
     }
 
     @Override

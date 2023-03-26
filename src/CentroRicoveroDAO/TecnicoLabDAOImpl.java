@@ -1,5 +1,6 @@
 package CentroRicoveroDAO;
 
+import CentroRicovero.Personale;
 import CentroRicovero.TecnicoLab;
 import CentroRicovero.UtilityDatabase;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TecnicoLabDAOImpl implements TecnicoLabDAO{
+public class TecnicoLabDAOImpl extends PersonaleDAOImpl{
     @Override
     public TecnicoLab get(int id) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
@@ -40,12 +41,12 @@ public class TecnicoLabDAOImpl implements TecnicoLabDAO{
     }
 
     @Override
-    public List<TecnicoLab> getAll() throws SQLException {
+    public List<Personale> getAll() throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         String codeSQL = "SELECT * FROM tecnico_lab";
         PreparedStatement statement = conn.prepareStatement(codeSQL);
 
-        ArrayList<TecnicoLab> tecnicoLabList = new ArrayList<>();
+        ArrayList<Personale> tecnicoLabList = new ArrayList<>();
 
         ResultSet resultSet = statement.executeQuery();
         try {
@@ -66,8 +67,7 @@ public class TecnicoLabDAOImpl implements TecnicoLabDAO{
         }
         return tecnicoLabList;
     }
-    //TODO
-    @Override
+
     public void insert(TecnicoLab tecnicoLab) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {
@@ -84,7 +84,6 @@ public class TecnicoLabDAOImpl implements TecnicoLabDAO{
         }
     }
 
-    @Override
     public void update(TecnicoLab tecnicoLab) throws SQLException {
         Connection conn = UtilityDatabase.getConnection();
         try {
