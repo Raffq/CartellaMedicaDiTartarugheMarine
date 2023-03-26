@@ -21,30 +21,12 @@ public class ComponentiDAOImpl implements ComponentiDAO{
 
     @Override
     public List<Componenti> getAll() throws SQLException {
-        Connection conn = UtilityDatabase.getConnection();
-        String codeSQL = "SELECT * FROM personale";
-        PreparedStatement statement = conn.prepareStatement(codeSQL);
+        return null;
+    }
 
-        ArrayList<Personale> personaleList = new ArrayList<>();
-
-        ResultSet resultSet = statement.executeQuery();
-        try {
-            while (resultSet.next()){
-                String nome = resultSet.getString("nome");
-                String cognome = resultSet.getString("cognome");
-                int matricola = resultSet.getInt("matricola");
-                int stipendio = resultSet.getInt("stipendio");
-                int telefono = resultSet.getInt("telefono");
-                String email = resultSet.getString("email");
-
-                Personale personale = new Personale(nome, cognome, stipendio, telefono, email);
-                personale.setMatricola(matricola);
-                personaleList.add(personale);
-            }
-        } catch (SQLException e) {
-            System.out.println("Qualcosa è andato storto");
-        }
-        return personaleList;
+    @Override
+    public Componenti getLast() throws SQLException {
+        return null;
     }
 
     @Override

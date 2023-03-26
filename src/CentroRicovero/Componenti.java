@@ -1,5 +1,6 @@
 package CentroRicovero;
 
+@Deprecated
 public class Componenti {
     String descrizione;
 
